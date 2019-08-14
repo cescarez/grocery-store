@@ -41,17 +41,33 @@ xdescribe "Customer Wave 2" do
       expect(customers.length).must_equal 35
       customers.each do |c|
         expect(c).must_be_kind_of Customer
+
+        expect(c.id).must_be_kind_of Integer
+        expect(c.email).must_be_kind_of String
+        expect(c.address).must_be_kind_of Hash
       end
     end
 
     it "Returns accurate information about the first customer" do
       first = Customer.all.first
+
       expect(first.id).must_equal 1
+      expect(first.email).must_equal "leonard.rogahn@hagenes.org"
+      expect(first.address[:street]).must_equal "71596 Eden Route"
+      expect(first.address[:city]).must_equal "Connellymouth"
+      expect(first.address[:state]).must_equal "LA"
+      expect(first.address[:zip]).must_equal "98872-9105"
     end
 
     it "Returns accurate information about the last customer" do
       last = Customer.all.last
+
       expect(last.id).must_equal 35
+      expect(last.email).must_equal "rogers_koelpin@oconnell.org"
+      expect(last.address[:street]).must_equal '7513 Kaylee Summit'
+      expect(last.address[:city]).must_equal 'Uptonhaven'
+      expect(last.address[:state]).must_equal 'DE'
+      expect(last.address[:zip]).must_equal '64529-2614'
     end
   end
 
