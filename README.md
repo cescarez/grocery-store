@@ -1,12 +1,8 @@
 # Grocery Store
 
-Let's simulate a grocery store system! We want to be able to keep track of the orders that folks make.
-
-This project will allow you to explore object-oriented design as well as a few other new topics. 
-
-This is an individual, [stage 1](https://github.com/Ada-Developers-Academy/pedagogy/blob/master/rule-of-three.md) project.
-
-Due before class on: DUE DATE
+## At a Glance
+- Individual, [stage 2](https://github.com/Ada-Developers-Academy/pedagogy/blob/master/rule-of-three.md) project
+- Due before class, **DATE HERE**
 
 ## Learning Goals
 
@@ -17,17 +13,18 @@ Skills that should be demonstrated through this project:
 - Object composition
 - Reading data from a CSV file
 
-## Baseline Setup
+## Objective
+
+We want to write library code that grocery stores would use. We want our library code to be able to keep track of the orders that folks make in the store.
+
+## Getting Started
 
 1. Fork the project master.
 1. Clone the forked repo: `$ git clone [YOUR FORKED REPO URL]`
 1. `cd` into the dir created `$ cd grocery-store`
-1. Run `git remote -v` to verify the folder you are in corresponds to the fork you have created.  
-  If it is **correct** it will include your username
-  If it is **incorrect** it will include "AdaGold" or "Ada-C#"
 1. Run `gem install minitest-skip` to install an extra gem for testing (more on what this actually does later).
 
-### Testing
+### Tests
 
 This is the first project where you'll be writing your own tests. Following the instructions from the [TDD lecture](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/master/00-programming-fundamentals/intro-to-automated-tests.md), there are three things in our project directory:
 
@@ -39,21 +36,21 @@ specs/
 
 Each class you write should get its own file, `lib/class_name.rb`. The specs for that class will be in `specs/class_name_spec.rb`, and you can run all specs using the `rake` command from your terminal.
 
-## Wave 1
+## Implementation Requirements
 
-### Learning Goals
+### Wave 1
+
+#### Wave 1 Goals
 - Create a **class**
 - Write **instance methods** inside a **class** to perform actions
 - Link two classes using **composition**
 - Use exceptions to handle errors
 - Verify code correctness by **testing**
 
-### Testing
+#### Testing Requirements in Wave 1
 For Wave 1, all tests have been provided for you. For each piece of functionality that you build, you should run the tests from the command line using the `rake` command. To focus on only one test at a time, change all `it` methods to `xit` except for the **one test** you'd like to run. All tests provided should be passing at the end of your work on Wave 1.
 
-### Requirements
-
-#### Customer
+#### `Customer` Implementation Requirements
 
 Create a class called `Customer`. Each new Customer should include the following attributes:
 - ID, a number
@@ -62,7 +59,7 @@ Create a class called `Customer`. Each new Customer should include the following
 
 ID should be _readable_ but not _writable_; the other two attributes can be both read and written.
 
-#### Order
+#### `Order` Implementation Requirements
 
 Create a class called `Order`. Each new Order should include the following attributes:
 - ID, a number (read-only)
@@ -85,27 +82,25 @@ In addition, `Order` should have:
 - An `add_product` method which will take in two parameters, product name and price, and add the data to the product collection
   - If a product with the same name has already been added to the order, an `ArgumentError` should be raised
 
-### Optional:
+### Optional Enhancements
 Make sure to write tests for any optionals you implement!
 
 - Add a `remove_product` method to the `Order` class which will take in one parameter, a product name, and remove the product from the collection
   - If no product with that name was found, an `ArgumentError` should be raised
 
-## Wave 2
+### Wave 2
 
-### Learning Goals
+#### Wave 2 Goals
 - Create and use class methods
 - Use a CSV file for loading data
 - Create your own tests to verify method correctness
 
-### Testing
+#### Testing Requirements in Wave 2
 You enter Wave 2 with all tests from Wave 1 passing. In Wave 2, all the tests for `Customer` and one of the specs for `Order` have been provided. The remaining tests are stubbed out in `order_spec.rb`. Filling in these stubs is part of Wave 2.
 
 **When you are done with Wave 2, all your tests from Wave 1 should still pass!**
 
-### Requirements
-
-#### Customer
+#### Required `Customer` Updates
 
 Add the following **class methods** to the `Customer` class:
 - `self.all` - returns a collection of `Customer` instances, representing all of the Customer described in the CSV file
@@ -132,7 +127,7 @@ Zip Code    | String  | The customer's zip code
 
 What should your program do if `Customer.find` is called with an ID that doesn't exist? Hint: what does [the `find` method for a Ruby array](https://ruby-doc.org/core/Enumerable.html#method-i-find) do?
 
-#### Order
+#### Required `Order` Updates
 
 Add the following **class methods** to the `Order` class:
 - `self.all` - returns a collection of `Order` instances, representing all of the Orders described in the CSV file
@@ -160,11 +155,11 @@ The data in this file is very different than what `Order.new` takes. You will ha
 1. Turn the customer ID into an instance of `Customer`
     - Didn't you just write a method to do this?
 
-### Optional:
+### Optional Enhancements
 
 - `Order.find_by_customer(customer_id)` - returns a **list** of `Order` instances where the value of the customer's ID matches the passed parameter.
 
-## Optional Wave 3: Saving Order Data
+### Optional Wave 3: Saving Order Data
 
 Add a new class method to each of `Order` and `Customer` called `save`. The `save` method should take one parameter, a file name, and save the list of objects to that file in the same format as the original CSV file.
 

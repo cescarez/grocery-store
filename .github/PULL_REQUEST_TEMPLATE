@@ -10,4 +10,3 @@ Why do you think we made the `.all` & `.find` methods class methods?  Why not in
 Think about the relation between `Order` and `Customer`. Is this relation one-to-one, one-to-many, or something else? How does that compare to the Solar System project? |
 How is the relation between `Order` and `Customer` tracked in the CSV file? How is it tracked in your program? Why might these be different? |
 Did the presence of automated tests change the way you thought about the problem? How? |
-CS Fun: If there are `C` customers listed in `customers.csv` and `R` orders listed in `orders.csv`, what is the time complexity of calling `Customer.find`? What is the time complexity of `Order.find`? |
