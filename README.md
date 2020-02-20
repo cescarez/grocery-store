@@ -159,20 +159,27 @@ The data in this file is very different than what `Order.new` takes. You will ha
 
 - `Order.find_by_customer(customer_id)` - returns a **list** of `Order` instances where the value of the customer's ID matches the passed parameter.
 
-### Optional Wave 3: Saving Order Data
+### Optional Wave 3: Saving New Data
 
-Add a new class method to each of `Order` and `Customer` called `save`. The `save` method should take one parameter, a file name, and save the list of objects to that file in the same format as the original CSV file.
+Add a new class method to the `Customer` class called `save`. This method is responsible for writing a new customer's information into a new customer CSV file.
 
-When you're done, you should be able to write code like the following:
+This class method `save` should:
+  - Take in two parameters: `filename` and `new_customer`
+    - `filename`, a string, which is a relative path to a new CSV file to create
+    - `new_customer`, an instance of `Customer`, which is a new customer
+  - This file saves a new customer's information, based on `new_customer`'s details, into the file defined by `filename`
+  - This new CSV file should be in the same format as what's described in `data/customers.csv`
+  - This method should always return `true`
+
+When you're done, you should be able to execute commands in the Terminal like the following:
 
 ```
 $ pry -r ./lib/customer.rb
-pry> Customer.save('new_customer_list.csv')
+pry> jared = Customer.new(777, "j@ada.org", {:street=>"123 Main", :city=>"Seattle", :state=>"WA", :zip=>"98101"})
+pry> Customer.save('new_customer_list.csv', jared)
 pry> exit
 $ cat new_customer_list.csv
-1,leonard.rogahn@hagenes.org,71596 Eden Route,Connellymouth,LA,98872-9105
-2,ruben_nikolaus@kreiger.com,876 Kemmer Cove,East Luellatown,AL,21362
-[ ... ]
+777,j@ada.org,123 Main,Seattle,WA,98101
 ```
 
 We do not require testing for this wave - testing with external resouces like files is tricky to get right. Instead, do some brainstorming: what kind of things would tests need to do, and what error cases would they handle? Why is testing tricky, and what might be done to overcome these problems? How could you learn more about this?
