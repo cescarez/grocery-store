@@ -36,6 +36,12 @@ test/
 
 Each class you write should get its own file, `lib/class_name.rb`. The tests for that class will be in `test/class_name_test.rb`, and you can run all tests using the `rake` command from your terminal.
 
+## A Quick Note
+
+If you would like to be able to manupulate the data with Enumerables methods, you will need to translate the data from a CSV::Table to an Array. The following is copied from the **"Bonus Syntax: CSV.read and Forcing CSV::Table to be an Array"** at the end of the [CSV as a Database lesson](https://learn-2.galvanize.com/cohorts/2036/blocks/875/content_files/03-language-features/csv-as-a-database.md):
+
+> The data returned from `CSV.read` looks like an array of arrays or an array of hashes, but is infact a `CSV::Table`. To transform this data into an array of hashes we need to add the following onto our `.read` method: `CSV.read('planets_data.csv', headers: true).map { |row| row.to_h }` when using headers and `CSV.read('planets_data.csv').map { |row| row.to_a }` when not using headers.
+
 ## Implementation Requirements
 
 ### Wave 1
