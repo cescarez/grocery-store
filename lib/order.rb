@@ -59,7 +59,7 @@ class Order
   end
 
   def self.find(id)
-    return all.find { |order| order.id == id }
+    return all.find { |order| order.id == id.to_i }
   end
 
   def self.find_by_customer(customer_id)

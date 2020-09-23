@@ -30,7 +30,7 @@ class Customer
   end
 
   def self.find(id)
-    return all.find { |customer| customer.id == id }
+    return all.find { |customer| customer.id == id.to_i }
   end
 
   def self.save(filename, new_customer)
