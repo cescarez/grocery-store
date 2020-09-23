@@ -43,8 +43,8 @@ class Customer
 
   private
 
-  def self.get_addresses(two_d_array)
-    addresses = two_d_array.map do |customer|
+  def self.get_addresses(external_file_data)
+    addresses = external_file_data.map do |customer|
       { street: customer[2], city: customer[3], state: customer[4], zip: customer[5] }
     end
     return addresses
