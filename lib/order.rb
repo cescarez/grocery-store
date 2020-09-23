@@ -17,10 +17,6 @@ class Order
   end
 
   def check_fulfillment_status(current_status)
-    if current_status.class != Symbol
-      current_status = current_status.downcase.to_sym
-    end
-
     raise ArgumentError, "Invalid order status." if !VALID_STATUSES.include?(current_status)
 
     return current_status
@@ -47,22 +43,6 @@ class Order
 
     @products.delete(product_name)
   end
-  #
-  # def pay
-  #   @fulfillment_status = VALID_STATUSES[1]
-  # end
-  #
-  # def process
-  #   @fulfillment_status = VALID_STATUSES[2]
-  # end
-  #
-  # def ship
-  #   @fulfillment_status = VALID_STATUSES[-2]
-  # end
-  #
-  # def deliver
-  #   @fulfillment_status = VALID_STATUSES[-1]
-  # end
 
   def self.get_all_products(two_d_array)
     all_products = two_d_array.map do |order|
@@ -84,7 +64,7 @@ class Order
 
     orders = []
     external_orders_file.each_with_index do |order, i|
-      orders << Order.new(order[0].to_i, all_products[i], Customer.find(order[2].to_i), order[3])
+      orders << Order.new(order[0].to_i, all_products[i], Customer.find(order[2].to_i), order[3].to_sym)
     end
 
     return orders

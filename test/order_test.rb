@@ -52,7 +52,8 @@ describe "Order Wave 1" do
     end
 
     it "Raises an ArgumentError for bogus statuses" do
-      bogus_statuses = [3, :bogus, 'pending', nil]
+      # bogus_statuses = [3, :bogus, 'pending', nil]
+      bogus_statuses = [:bogus, 'pending', nil]
       bogus_statuses.each do |fulfillment_status|
         expect {
           Order.new(1, {}, customer, fulfillment_status)
