@@ -45,19 +45,6 @@ class Order
     @products.delete(product_name)
   end
 
-  def self.get_all_products(two_d_array)
-    all_products = two_d_array.map do |order|
-      order_products = order[1].split(';')
-      this_order = order_products.each_with_object({}) do |product, hash|
-        each_product = product.split(':')
-        hash[each_product[0].downcase] = each_product[1].to_f
-      end
-      this_order
-    end
-
-    return all_products
-  end
-
   def self.all
     external_orders_file = CSV.read('data/orders.csv').map { |row| row.to_a }
 
@@ -77,6 +64,21 @@ class Order
 
   def self.find_by_customer(customer_id)
     return self.all.filter { |order| order.customer.id == customer_id }
+  end
+
+  private
+
+  def self.get_all_products(two_d_array)
+    all_products = two_d_array.map do |order|
+      order_products = order[1].split(';')
+      this_order = order_products.each_with_object({}) do |product, hash|
+        each_product = product.split(':')
+        hash[each_product[0].downcase] = each_product[1].to_f
+      end
+      this_order
+    end
+
+    return all_products
   end
 
 end
