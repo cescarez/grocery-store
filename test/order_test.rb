@@ -112,7 +112,7 @@ describe "Order Wave 1" do
     end
   end
 
-  describe "remove_product" do
+  describe "#remove_product" do
     it "Decreases the number of products" do
       products = { "banana" => 1.99, "cracker" => 3.00 }
       before_count = products.count
@@ -149,10 +149,19 @@ describe "Order Wave 1" do
 end
 
 # TODO: change 'xdescribe' to 'describe' to run these tests
-xdescribe "Order Wave 2" do
+describe "Order Wave 2" do
   describe "Order.all" do
     it "Returns an array of all orders" do
-      # TODO: Your test code here!
+      orders = Order.all
+
+      expect(orders.length).must_equal 100
+      orders.each do |order|
+        expect(order).must_be_instance_of Order
+        expect(order.id).must_be_kind_of Integer
+        expect(order.customer).must_be_instance_of Customer
+        expect(order.products).must_be_kind_of Hash
+        expect(order.fulfillment_status).must_be_kind_of Symbol
+      end
     end
 
     it "Returns accurate information about the first order" do
