@@ -1,7 +1,7 @@
 # Christabel Sebastian
-# Last updated, Sept 22, 2020
 # Ada C14
 # Grocery Store: Order Class
+# sources: https://stackoverflow.com/questions/336024/calling-a-class-method-within-a-class
 
 class Order
   VALID_STATUSES = [:pending, :paid, :processing, :shipped, :complete]
@@ -13,7 +13,7 @@ class Order
   def initialize(id_num, products, customer_object,fulfillment_status = VALID_STATUSES[0])
     @id = id_num
     @customer = customer_object
-    @products = (products && !products.empty?) ? products : Hash.new(0)
+    @products = (products && !products.empty?) ? products : {}
     @fulfillment_status = check_fulfillment_status(fulfillment_status)
   end
 
@@ -48,7 +48,7 @@ class Order
   def self.all
     external_orders_file = CSV.read('data/orders.csv').map { |row| row.to_a }
 
-    all_products = self.get_all_products(external_orders_file)
+    all_products = get_all_products(external_orders_file)
 
     orders = []
     external_orders_file.each_with_index do |order, i|
@@ -59,11 +59,11 @@ class Order
   end
 
   def self.find(id)
-    return self.all.find { |order| order.id == id }
+    return all.find { |order| order.id == id }
   end
 
   def self.find_by_customer(customer_id)
-    return self.all.filter { |order| order.customer.id == customer_id }
+    return all.filter { |order| order.customer.id == customer_id }
   end
 
   private

@@ -1,7 +1,8 @@
 # Christabel Sebastian
-# Last updated, Sept 22, 2020
 # Ada C14
 # Grocery Store: Customer Class
+# sources: https://stackoverflow.com/questions/336024/calling-a-class-method-within-a-class
+
 
 require 'csv'
 
@@ -18,7 +19,7 @@ class Customer
   def self.all
     external_customer_file = CSV.read('data/customers.csv').map { |row| row.to_a }
 
-    addresses = self.get_addresses(external_customer_file)
+    addresses = get_addresses(external_customer_file)
 
     customers = []
     external_customer_file.each_with_index do |customer, i|
@@ -29,13 +30,13 @@ class Customer
   end
 
   def self.find(id)
-    return self.all.find { |customer| customer.id == id }
+    return all.find { |customer| customer.id == id }
   end
 
   def self.save(filename, new_customer)
     #mode "a" option = append write-only
     CSV.open(filename, "a") do |csv|
-      csv << new_customer.id + ',' + new_customer.email + ',' + flatten_address(new_customer.address)
+      csv << new_customer.id + ',' + new_customer.email + ',' + new_customer.address.values.join(',')
     end
   end
 
@@ -48,7 +49,4 @@ class Customer
     return addresses
   end
 
-  def flatten_address(address_hash)
-    return address_hash.values.join(',')
-  end
 end
