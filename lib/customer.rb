@@ -35,8 +35,9 @@ class Customer
 
   def self.save(filename, new_customer)
     #mode "a" option = append write-only
-    CSV.open(filename, "a") do |csv|
-      csv << new_customer.id + ',' + new_customer.email + ',' + new_customer.address.values.join(',')
+    CSV.open(filename, 'a') do |csv|
+      new_row = [new_customer.id.to_s, new_customer.email, new_customer.address.values].flatten
+      csv << new_row
     end
   end
 
@@ -50,3 +51,4 @@ class Customer
   end
 
 end
+
