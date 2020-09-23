@@ -1,7 +1,9 @@
 # Christabel Sebastian
 # Ada C14
 # Grocery Store: Order Class
-# sources: https://stackoverflow.com/questions/336024/calling-a-class-method-within-a-class
+# sources:
+## https://stackoverflow.com/questions/336024/calling-a-class-method-within-a-class
+## https://stackoverflow.com/questions/4697557/how-to-map-with-index-in-ruby
 
 class Order
   VALID_STATUSES = [:pending, :paid, :processing, :shipped, :complete]
@@ -49,9 +51,8 @@ class Order
 
     all_products = get_all_products(external_orders_file)
 
-    orders = []
-    external_orders_file.each_with_index do |order, i|
-      orders << Order.new(order[0].to_i, all_products[i], Customer.find(order[2].to_i), order[3].to_sym)
+    orders = external_orders_file.each_with_index.map do |order, i|
+      Order.new(order[0].to_i, all_products[i], Customer.find(order[2].to_i), order[3].to_sym)
     end
 
     return orders

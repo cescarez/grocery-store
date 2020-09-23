@@ -1,8 +1,9 @@
 # Christabel Sebastian
 # Ada C14
 # Grocery Store: Customer Class
-# sources: https://stackoverflow.com/questions/336024/calling-a-class-method-within-a-class
-
+# sources:
+## https://stackoverflow.com/questions/336024/calling-a-class-method-within-a-class
+## https://stackoverflow.com/questions/4697557/how-to-map-with-index-in-ruby
 
 require 'csv'
 
@@ -21,9 +22,8 @@ class Customer
 
     addresses = get_addresses(external_customer_file)
 
-    customers = []
-    external_customer_file.each_with_index do |customer, i|
-      customers << Customer.new(customer[0].to_i, customer[1], addresses[i])
+    customers = external_customer_file.each_with_index.map do |customer, i|
+      Customer.new(customer[0].to_i, customer[1], addresses[i])
     end
 
     return customers
