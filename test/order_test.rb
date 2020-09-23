@@ -110,6 +110,35 @@ describe "Order Wave 1" do
       # The list of products should not have been modified
       expect(order.total).must_equal before_total
     end
+
+    it "Raises an ArgumentError for non-numerical string prices" do
+      products = { "banana" => 1.99, "cracker" => 3.00 }
+
+      order = Order.new(1337, products, customer)
+      before_total = order.total
+
+      expect {
+        order.add_product("banana", "four twenty-five")
+      }.must_raise ArgumentError
+
+      # The list of products should not have been modified
+      expect(order.total).must_equal before_total
+    end
+
+
+    it "Raises an ArgumentError for negative prices" do
+      products = { "banana" => 1.99, "cracker" => 3.00 }
+
+      order = Order.new(1337, products, customer)
+      before_total = order.total
+
+      expect {
+        order.add_product("banana", "-4.25")
+      }.must_raise ArgumentError
+
+      # The list of products should not have been modified
+      expect(order.total).must_equal before_total
+    end
   end
 
   describe "#remove_product" do
