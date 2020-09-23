@@ -72,7 +72,7 @@ class Order
       order_products = order[1].split(';')
       this_order = order_products.each_with_object({}) do |product, hash|
         each_product = product.split(':')
-        hash[each_product[0]] = each_product[1].to_f
+        hash[each_product[0].downcase] = each_product[1].to_f
       end
       this_order
     end
@@ -86,8 +86,8 @@ class Order
     return orders
   end
 
-  def self.find
-    return self.all.find
+  def self.find(id)
+    return self.all.find { |order| order.id == id }
   end
 
 end
