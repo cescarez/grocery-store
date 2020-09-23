@@ -68,8 +68,8 @@ class Order
 
   private
 
-  def self.get_all_products(two_d_array)
-    all_products = two_d_array.map do |order|
+  def self.get_all_products(external_file_data)
+    all_products = external_file_data.map do |order|
       order_products = order[1].split(';')
       this_order = order_products.each_with_object({}) do |product, hash|
         each_product = product.split(':')
