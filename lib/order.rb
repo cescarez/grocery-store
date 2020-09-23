@@ -7,8 +7,7 @@ class Order
   VALID_STATUSES = [:pending, :paid, :processing, :shipped, :complete]
   TAX_RATE = 0.075
 
-  attr_reader :id, :products, :fulfillment_status
-  attr_accessor :customer
+  attr_reader :id, :products, :fulfillment_status, :customer
 
   def initialize(id_num, products, customer_object,fulfillment_status = VALID_STATUSES[0])
     @id = id_num
