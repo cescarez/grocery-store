@@ -39,4 +39,16 @@ class Customer
     return self.all.find { |customer| customer.id == id }
   end
 
+  def flatten_address(address_hash)
+    return (address_hash[:street] + ',' + address_hash[:city] + ',' + address_hash[:state] + ',' + address_hash[:zip])
+  end
+
+  def self.save(filename, new_customer)
+    #mode "a" option = append write-only
+    CSV.open(filename, "a") do |csv|
+      csv << new_customer.id + ',' + new_customer.email + ',' + flatten_address(new_customer.address)
+    end
+
+  end
+
 end

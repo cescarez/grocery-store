@@ -90,3 +90,7 @@ describe "Customer Wave 2" do
     end
   end
 end
+
+describe "Customer Wave 3" do
+
+end
