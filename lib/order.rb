@@ -32,7 +32,7 @@ class Order
   def add_product(product_name, price)
     product_name = product_name.downcase
 
-    raise ArgumentError, "Invalid price." if (price.to_f == 0 && !price.match(/[d]+[.]?[d]*/))
+    raise ArgumentError, "Invalid price." if ((price.to_f == 0 && !price.match(/[d]+[.]?[d]*/)) || price.to_f < 0)
     raise ArgumentError, "Product was already in Order #{@id} and cannot be added." if @products.include?(product_name)
 
     @products[product_name] = price.to_f.round(2)
