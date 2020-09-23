@@ -64,11 +64,8 @@ class Order
   #   @fulfillment_status = VALID_STATUSES[-1]
   # end
 
-  def self.all
-    external_orders_file = CSV.read('data/orders.csv').map { |row| row.to_a }
-    #id, customer object, product hash, status
-
-    all_products = external_orders_file.map do |order|
+  def self.get_all_products(two_d_array)
+    all_products = two_d_array.map do |order|
       order_products = order[1].split(';')
       this_order = order_products.each_with_object({}) do |product, hash|
         each_product = product.split(':')
@@ -77,6 +74,13 @@ class Order
       this_order
     end
 
+    return all_products
+  end
+
+  def self.all
+    external_orders_file = CSV.read('data/orders.csv').map { |row| row.to_a }
+
+    all_products = self.get_all_products(external_orders_file)
 
     orders = []
     external_orders_file.each_with_index do |order, i|
@@ -88,6 +92,10 @@ class Order
 
   def self.find(id)
     return self.all.find { |order| order.id == id }
+  end
+
+  def self.find_by_customer(customer_id)
+    return self.all.filter { |order| order.customer.id == customer_id }
   end
 
 end
