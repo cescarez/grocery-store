@@ -2,6 +2,7 @@
 # Last updated, Sept 22, 2020
 # Ada C14
 # Grocery Store: Order Class
+
 class Order
   VALID_STATUSES = [:pending, :paid, :processing, :shipped, :complete]
   TAX_RATE = 0.075
