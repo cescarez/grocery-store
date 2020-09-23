@@ -68,15 +68,13 @@ class Order
     external_orders_file = CSV.read('data/orders.csv').map { |row| row.to_a }
     #id, customer object, product hash, status
 
-    all_products = []
-    external_orders_file.each do |order|
-      this_order_hash = {}
+    all_products = external_orders_file.map do |order|
       order_products = order[1].split(';')
-      order_products.each do |product|
+      this_order = order_products.each_with_object({}) do |product, hash|
         each_product = product.split(':')
-        this_order_hash[each_product[0]] = each_product[1].to_f
+        hash[each_product[0]] = each_product[1].to_f
       end
-      all_products << this_order_hash
+      this_order
     end
 
 
@@ -86,6 +84,10 @@ class Order
     end
 
     return orders
+  end
+
+  def self.find
+    return self.all.find
   end
 
 end
