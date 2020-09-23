@@ -223,4 +223,39 @@ describe "Order Wave 2" do
       expect(Order.find(101)).must_be_nil
     end
   end
+
+  describe "Order.find_by_customer" do
+    it "Can find the orders for the first customer id in the CSV" do
+      first = Order.find_by_customer(25)
+
+      expect(first).must_be_kind_of Array
+      expect(first.length).must_equal 6
+    end
+
+    it "Can find the orders for the first customer id" do
+      first = Order.find_by_customer(1)
+
+      expect(first).must_be_kind_of Array
+      expect(first.length).must_equal 1
+    end
+
+    it "Can find the orders for the last customer id in the CSV" do
+      last = Order.find_by_customer(20)
+
+      expect(last).must_be_kind_of Array
+      expect(last.length).must_equal 7
+    end
+
+    it "Can find the orders for the last customer id" do
+      first = Order.find_by_customer(35)
+
+      expect(first).must_be_kind_of Array
+      expect(first.length).must_equal 4
+    end
+
+    it "Returns an empty array for a customer that doesn't exist" do
+      expect(Order.find_by_customer(36)).must_be_empty
+    end
+  end
+
 end
