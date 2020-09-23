@@ -15,6 +15,7 @@ class Customer
     @address = delivery_address_hash
   end
 
+  #TODO: DRY/refactor self.all method
   def self.all
     external_customer_file = CSV.read('data/customers.csv').map { |row| row.to_a }
 
@@ -31,7 +32,7 @@ class Customer
   end
 
   def self.find(id)
-
+    return self.all.find { |customer| customer.id == id }
   end
 
 end
