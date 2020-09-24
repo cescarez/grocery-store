@@ -63,7 +63,7 @@ class Order
   end
 
   def self.find_by_customer(customer_id)
-    return all.filter { |order| order.customer.id == customer_id.to_i }
+    return all.filter { |order| order.customer.id == customer_id.to_i }.sort_by { |order| order.id }
   end
 
   private

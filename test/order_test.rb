@@ -261,13 +261,6 @@ describe "Order Wave 2" do
       expect(first.length).must_equal 6
     end
 
-    it "Can find the orders for the first customer id" do
-      first = Order.find_by_customer(1)
-
-      expect(first).must_be_kind_of Array
-      expect(first.length).must_equal 1
-    end
-
     it "Can find the orders for the last customer id in the CSV" do
       last = Order.find_by_customer(20)
 
@@ -275,11 +268,25 @@ describe "Order Wave 2" do
       expect(last.length).must_equal 7
     end
 
-    it "Can find the orders for the last customer id" do
-      first = Order.find_by_customer(35)
+    it "Can find the orders for the first customer id" do
+      first = Order.find_by_customer(1)
 
       expect(first).must_be_kind_of Array
-      expect(first.length).must_equal 4
+      expect(first.length).must_equal 1
+    end
+
+    it "Can find the orders for the last customer id" do
+      last = Order.find_by_customer(35)
+
+      expect(last).must_be_kind_of Array
+      expect(last.length).must_equal 4
+    end
+
+    it "Returns a list of orders sorted by order id for the last customer id" do
+      orders = Order.find_by_customer(35)
+      order_ids = orders.map { |order| order.id.to_i }
+
+      expect(order_ids).must_equal [4, 47, 56, 58]
     end
 
     it "Returns an empty array for a customer that doesn't exist" do
