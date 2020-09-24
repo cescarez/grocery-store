@@ -282,7 +282,8 @@ describe "Order Wave 2" do
       expect(last.length).must_equal 4
     end
 
-    it "Returns a list of orders sorted by order id for the last customer id" do
+    #sort logic no longer being handled by .find_by_customer, but by .all
+    xit "Returns a list of orders sorted by order id for the last customer id" do
       orders = Order.find_by_customer(35)
       order_ids = orders.map { |order| order.id.to_i }
 

@@ -55,7 +55,7 @@ class Order
       Order.new(order[0].to_i, all_products[i], Customer.find(order[2].to_i), order[3].to_sym)
     end
 
-    return orders
+    return orders.sort_by { |order| order.id }
   end
 
   def self.find(id)
@@ -63,7 +63,7 @@ class Order
   end
 
   def self.find_by_customer(customer_id)
-    return all.filter { |order| order.customer.id == customer_id.to_i }.sort_by { |order| order.id }
+    return all.filter { |order| order.customer.id == customer_id.to_i }
   end
 
   private

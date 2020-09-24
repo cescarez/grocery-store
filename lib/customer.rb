@@ -26,7 +26,7 @@ class Customer
       Customer.new(customer[0].to_i, customer[1], addresses[i])
     end
 
-    return customers
+    return customers.sort_by { |customer| customer.id }
   end
 
   def self.find(id)
