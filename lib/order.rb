@@ -9,6 +9,7 @@
 require_relative 'customer'
 
 class Order
+  DATA_FILEPATH = 'data/orders.csv'
   VALID_STATUSES = [:pending, :paid, :processing, :shipped, :complete]
   TAX_RATE = 0.075
 
@@ -49,8 +50,8 @@ class Order
     @products.delete(product_name)
   end
 
-  def self.all
-    external_orders_file = CSV.read('data/orders.csv').map { |row| row.to_a }
+  def self.all(filename)
+    external_orders_file = CSV.read(filename).map { |row| row.to_a }
 
     all_products = get_all_products(external_orders_file)
 
@@ -62,11 +63,11 @@ class Order
   end
 
   def self.find(id)
-    return all.bsearch { |order| id.to_i <=> order.id }
+    return all(DATA_FILEPATH).bsearch { |order| id.to_i <=> order.id }
   end
 
   def self.find_by_customer(customer_id)
-    return all.filter { |order| order.customer.id == customer_id.to_i }
+    return all(DATA_FILEPATH).filter { |order| order.customer.id == customer_id.to_i }
   end
 
   private

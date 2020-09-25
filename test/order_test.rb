@@ -180,7 +180,7 @@ end
 describe "Order Wave 2" do
   describe "Order.all" do
     it "Returns an array of all orders" do
-      orders = Order.all
+      orders = Order.all(Order::DATA_FILEPATH)
 
       expect(orders.length).must_equal 100
       orders.each do |order|
@@ -202,7 +202,7 @@ describe "Order Wave 2" do
       customer_id = 25
       fulfillment_status = :complete
 
-      order = Order.all.first
+      order = Order.all(Order::DATA_FILEPATH).first
 
       # Check that all data was loaded as expected
       expect(order.id).must_equal id
@@ -222,7 +222,7 @@ describe "Order Wave 2" do
       customer_id = 20
       fulfillment_status = :pending
 
-      order = Order.all.last
+      order = Order.all(Order::DATA_FILEPATH).last
 
       # Check that all data was loaded as expected
       expect(order.id).must_equal id
