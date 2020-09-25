@@ -26,7 +26,7 @@ class Order
   end
 
   def total
-    sub_total = @products.sum {|product_name, price| price}
+    sub_total = @products.values.sum
     return ((1 + TAX_RATE) * sub_total).round(2)
   end
 
