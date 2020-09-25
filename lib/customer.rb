@@ -43,15 +43,9 @@ class Customer
       csv << new_row
     end
 
-    p all('new_customer_list.csv').last
-    p new_customer
-    p all('new_customer_list.csv').last == new_customer
-    p all('new_customer_list.csv').last === new_customer
-    p all('new_customer_list.csv').last.equal? new_customer
-    p all('new_customer_list.csv').last.eql? new_customer
-    p all('new_customer_list.csv').last <=> new_customer
+    last_saved = all(filename).last
 
-    if all('new_customer_list.csv').last == new_customer
+    if last_saved.id == new_customer.id && last_saved.email == new_customer.email && last_saved.address == new_customer.address
       return true
     else
       raise StandardError, "Error occurred while saving to #{filename}. Save aborted."
