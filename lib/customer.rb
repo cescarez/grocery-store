@@ -31,7 +31,7 @@ class Customer
   end
 
   def self.find(id)
-    return all.find { |customer| customer.id == id.to_i }
+    return all.bsearch { |customer| id.to_i <=>  customer.id }
   end
 
   def self.save(filename, new_customer)

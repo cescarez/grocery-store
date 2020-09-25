@@ -60,7 +60,7 @@ class Order
   end
 
   def self.find(id)
-    return all.find { |order| order.id == id.to_i }
+    return all.bsearch { |order| id.to_i <=> order.id }
   end
 
   def self.find_by_customer(customer_id)
