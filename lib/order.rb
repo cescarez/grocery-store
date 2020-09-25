@@ -6,6 +6,8 @@
 ## https://stackoverflow.com/questions/4697557/how-to-map-with-index-in-ruby
 ## per Devin 9/24/2020, for helper methods called in class methods, (1) try and write the helper method as an instance method and see if it works (preferred) (2) otherwise, write it the helper method as a class method (kinda weird) and can put it in a `private` block to indicate/restrict the helper method from being called outside of the class (still kinda weird, but now kinda weird and more clear/restricted) -- see Customer.get_addresses and Order.get_all_products
 
+require_relative 'customer'
+
 class Order
   VALID_STATUSES = [:pending, :paid, :processing, :shipped, :complete]
   TAX_RATE = 0.075
