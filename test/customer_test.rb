@@ -35,7 +35,7 @@ end
 describe "Customer Wave 2" do
   describe "Customer.all" do
     it "Returns an array of all customers" do
-      customers = Customer.all
+      customers = Customer.all(Customer::DATA_FILEPATH)
 
       expect(customers.length).must_equal 35
       customers.each do |c|
@@ -48,7 +48,7 @@ describe "Customer Wave 2" do
     end
 
     it "Returns accurate information about the first customer" do
-      first = Customer.all.first
+      first = Customer.all(Customer::DATA_FILEPATH).first
 
       expect(first.id).must_equal 1
       expect(first.email).must_equal "leonard.rogahn@hagenes.org"
@@ -59,7 +59,7 @@ describe "Customer Wave 2" do
     end
 
     it "Returns accurate information about the last customer" do
-      last = Customer.all.last
+      last = Customer.all(Customer::DATA_FILEPATH).last
 
       expect(last.id).must_equal 35
       expect(last.email).must_equal "rogers_koelpin@oconnell.org"

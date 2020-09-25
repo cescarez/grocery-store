@@ -9,6 +9,8 @@
 require 'csv'
 
 class Customer
+  DATA_FILEPATH = 'data/customers.csv'
+
   attr_reader :id
   attr_accessor :email, :address
 
@@ -18,8 +20,8 @@ class Customer
     @address = delivery_address_hash
   end
 
-  def self.all
-    external_customer_file = CSV.read('data/customers.csv').map { |row| row.to_a }
+  def self.all(filename)
+    external_customer_file = CSV.read(filename).map { |row| row.to_a }
 
     addresses = get_addresses(external_customer_file)
 
@@ -31,7 +33,7 @@ class Customer
   end
 
   def self.find(id)
-    return all.bsearch { |customer| id.to_i <=>  customer.id }
+    return all(DATA_FILEPATH).bsearch { |customer| id.to_i <=>  customer.id }
   end
 
   def self.save(filename, new_customer)
@@ -40,6 +42,21 @@ class Customer
       new_row = [new_customer.id, new_customer.email, new_customer.address.values].flatten
       csv << new_row
     end
+
+    p all('new_customer_list.csv').last
+    p new_customer
+    p all('new_customer_list.csv').last == new_customer
+    p all('new_customer_list.csv').last === new_customer
+    p all('new_customer_list.csv').last.equal? new_customer
+    p all('new_customer_list.csv').last.eql? new_customer
+    p all('new_customer_list.csv').last <=> new_customer
+
+    if all('new_customer_list.csv').last == new_customer
+      return true
+    else
+      raise StandardError, "Error occurred while saving to #{filename}. Save aborted."
+    end
+
   end
 
   private
